@@ -50,15 +50,11 @@ const numberOfVideos = (channel) => {
 //   // Your code here
 // }
 
-// const channelHasVideo = (videoTitle, channel) => {
-//   for (let i = 0; i < channel.videos.length; i++) {
-//     let channelVideoTitle = channel.videos[i].title;
-//     if (channelVideoTitle === videoTitle) return true;
-//     else return false;
-//   }
-// };
-
-const channelHasVideo = (videoTitle, channel) => {};
+const channelHasVideo = (videoTitle, channel) => {
+  return channel.videos.some(
+    (video) => video.title.toLowerCase() === videoTitle.toLowerCase()
+  );
+};
 
 // console.log(channelHasVideo("The Universal S", channels[0]));
 // console.log(channelHasVideo("The Universal S", channels[1]));
@@ -92,7 +88,9 @@ const getChannelByName = (channelName, channels) => {
 //   // Your code here
 // }
 
-const getChannelByVideoTitle = (videoTitle, channels) => {};
+const getChannelByVideoTitle = (videoTitle, channels) => {
+  return channels.find((channel) => channelHasVideo(videoTitle, channel));
+};
 // console.log(channelHasVideo("The Universal S", channels));
 
 /**************************************************************
@@ -107,7 +105,14 @@ const getChannelByVideoTitle = (videoTitle, channels) => {};
 //   // Your code here
 // }
 
-const searchChannels = (query, channels) => {};
+const searchChannels = (query, channels) => {
+  const queryLower = query.toLowerCase();
+  return channels.filter(
+    (channel) =>
+      channel.name.toLowerCase().includes(queryLower) ||
+      channel.description.toLowerCase().includes(queryLower)
+  );
+};
 // console.log(searchChannels("the", channels));
 
 module.exports = {
